@@ -1,1 +1,5 @@
-console.log("hello world");
+const render = () => {
+window.alert('Hillarious');
+};
+
+render();
