@@ -1,16 +1,17 @@
+import Todo from './todo';
 const Projects = (name) => {
   let todos = [];
 
   const allTodos = () => {
-    todos;
+    return todos;
   };
   
   const getTodo = (position) => {
-    todos[position];
+    return todos[position];
   };
 
-  const addTodo = (newTodo) => {
-    todos.push(newTodo);
+  const addTodo = (title, description, dueDate, priority) => {
+    todos.push(Todo(title, description, dueDate, priority));
   }
 
   return {
@@ -20,3 +21,5 @@ const Projects = (name) => {
     addTodo
   }
 };
+
+export default Projects;
