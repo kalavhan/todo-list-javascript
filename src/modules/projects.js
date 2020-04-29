@@ -1,4 +1,5 @@
 import Todo from './todo';
+
 const Projects = (name) => {
   let todos = [];
 
@@ -14,11 +15,16 @@ const Projects = (name) => {
     todos.push(Todo(title, description, dueDate, priority));
   }
 
+  const deleteTodo = (index) => {
+    todos.splice(index, 1);
+  };
+
   return {
     name,
     allTodos,
     getTodo,
-    addTodo
+    addTodo,
+    deleteTodo
   }
 };
 

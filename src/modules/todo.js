@@ -5,11 +5,11 @@ const Todo = (title, description, dueDate, priority, status = false) => {
 
   const unchecked = () => status = false;
 
-  const editTask = (editedTitle, editedDescription, editedDueDate, editedPriority) => {
-    title = editedTitle;
-    description = editedDescription;
-    dueDate = editedDueDate;
-    priority = editedPriority;
+  function editTask(editedTitle, editedDescription, editedDueDate, editedPriority) {
+    this.title = editedTitle;
+    this.description = editedDescription;
+    this.dueDate = editedDueDate;
+    this.priority = editedPriority;
   }
 
   return {

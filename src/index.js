@@ -1,18 +1,43 @@
-import projectList from './modules/projectlist';
+import './index.css';
+import projectController from './modules/project_controller';
+
+let tContainer = document.getElementById('tasks');
+let pContainer = document.getElementById('projects');
+
+const tasksView = (tasks) => {
+  const tList = document.createElement('ul');
+  tContainer.appendChild(tList);
+  tasks.forEach( task => {
+    const taskName = document.createElement('li');
+    taskName.innerHTML = task.title;
+    tList.appendChild(taskName);
+  });
+};
+
+const projectsView = (projects) => {
+  const pList = document.createElement('ul');
+  pContainer.appendChild(pList);
+  projects.forEach(project => {
+    const projectName = document.createElement('li');
+    projectName.innerHTML = project.name
+    pList.appendChild(projectName);
+    if (project.name === 'Default') {
+      tasksView(project.allTodos());
+    }    
+
+    projectName.addEventListener('click', () => {
+      tContainer.innerHTML = '';
+      tasksView(project.allTodos());
+    });
+
+  });
+  
+};
+
 const render = () => {
-window.alert('Hillarious');
-const pList = projectList();
-pList.addProject('second');
-console.log(pList.projects);
-let pro = pList.projects[1];
-let qwe = pList.projects[0];
-pro.addTodo('Go to walk', 'walk in the park', '24/06/2020', 'Medium');
-qwe.addTodo('Buy cofee', 'go to the coffee shop', '24/06/2020', 'High');
-console.log(pro.allTodos());
-console.log(qwe.allTodos());
-let task = pro.getTodo(0);
-task.editTask('juojue', 'jueue', 'date', 'High');
-console.log(pro.allTodos());
+  const controller = projectController();
+  const projects = controller.allProjects();
+  projectsView(projects);
 };
 
 render();
