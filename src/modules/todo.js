@@ -1,4 +1,4 @@
-const Todo = (title, description, dueDate, priority, status = false) => {
+const Todo = (title, description, dueDate, priority, status = false, projectId) => {
 
   const toggleCheck = () => status = !status;
 
@@ -13,7 +13,8 @@ const Todo = (title, description, dueDate, priority, status = false) => {
     priority,
     toggleCheck,
     checked,
-    unchecked
+    unchecked,
+    projectId
   }
 
 };
