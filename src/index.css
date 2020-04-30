@@ -2,7 +2,7 @@
   --primary-color: #d44638;
   --secondary-color: #b23121;
   --bg1-color: #eeeeee;
-  --bg2-color: #e2e2e2;
+  --bg2-color: #e2e2e2b6;
 }
 body {
   padding: 0;
@@ -120,4 +120,13 @@ body {
 
 .pListContainer > ul > li {
   padding: 10px;
+  width: 60%;
+}
+
+.pListContainer > ul > li:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--bg2-color);
 }
