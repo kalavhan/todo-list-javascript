@@ -1,4 +1,9 @@
-
+:root {
+  --primary-color: #d44638;
+  --secondary-color: #b23121;
+  --bg1-color: #eeeeee;
+  --bg2-color: #e2e2e2;
+}
 body {
   padding: 0;
   margin: 0;
@@ -12,7 +17,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 70px);
 }
 
 #projects {
@@ -21,4 +26,98 @@ body {
 
 #tasks {
   width: 70%;
+}
+
+#content { 
+  display: flex;
+}
+
+.projectModalContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.projectModal {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  right: calc(50% - 150px);
+  top: calc(50% - 100px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.projectModal > span {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+  align-self: flex-end;
+  padding-bottom: 0;
+  padding: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin: -20px -20px;
+  background-color: #000;
+}
+
+.projectModal > span:hover {
+  cursor: pointer;
+}
+
+.projectModal > h2 {
+  margin-top: 20px;
+}
+
+.projectModal > button {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  border-radius: 30px;
+  padding: 0.7em 2em;
+  color: #fff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.pContainerTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  margin-bottom: 20px;
+}
+
+.pContainerTop > button {
+  width: 70%;
+}
+
+.pListContainer {
+  overflow-y: scroll;
+  background-color: var(--bg1-color);
+  height: 80%;
+}
+
+.pListContainer > ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pListContainer > ul > li {
+  padding: 10px;
 }
