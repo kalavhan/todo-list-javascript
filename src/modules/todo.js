@@ -1,5 +1,7 @@
 const Todo = (title, description, dueDate, priority, status = false) => {
-  const toggleCheck = () => status = !status;
+  function toggleCheck() {
+    this.status = !this.status;
+  }
 
   const checked = () => status = true;
 
@@ -17,6 +19,7 @@ const Todo = (title, description, dueDate, priority, status = false) => {
     description,
     dueDate,
     priority,
+    status,
     toggleCheck,
     checked,
     unchecked,

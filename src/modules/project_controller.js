@@ -4,12 +4,12 @@ const projectController = () => {
   let projects = [];
 
   const defaultProject = Projects('Default');
-  defaultProject.addTodo('Go to walk', 'walk in the park', '24/06/2020', 'Medium');
+  defaultProject.addTodo('Go to walk', 'walk in the park', '2020-06-24', 'Medium');
   projects.push(defaultProject);
 
   const project2 = Projects('Project 2')
   projects.push(project2);
-  project2.addTodo('Write article', 'Publich article to medium', '24/06/2020', 'Low');
+  project2.addTodo('Write article', 'Publich article to medium', '2020-07-12', 'Low');
 
   projects.push(Projects('Project 3'));
 

@@ -1,5 +1,12 @@
 import './index.css';
 import projectController from './modules/project_controller';
+import Helpers from './modules/helpers';
+/* eslint-disable */
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
+import '@fortawesome/fontawesome-free/js/brands';
+/* eslint-enable */
 
 let tContainer = document.getElementById('tasks');
 let pContainer = document.getElementById('projects');
@@ -7,6 +14,8 @@ let content = document.getElementById('content');
 const controller = projectController();
 let lastProjectSelected = '';
 let activeProject = '';
+let activeTask = '';
+const helper = Helpers();
 
 const newTaskModal = () => {
   const taskModalContainer = document.createElement('div');
@@ -14,8 +23,9 @@ const newTaskModal = () => {
   const taskModal = document.createElement('div');
   taskModal.classList.add('taskModal');
 
-  const closeBtn = document.createElement("span");
+  const closeBtn = document.createElement('span');
   closeBtn.innerHTML = '&#10005;';
+  closeBtn.classList.add('closeBtn');
   taskModal.appendChild(closeBtn);
 
   const titleModal = document.createElement('h2');
@@ -39,12 +49,12 @@ const newTaskModal = () => {
   taskModal.appendChild(datePicker);
 
   let array = ['--Priority--', 'High', 'Medium', 'Low'];
-  let selectList = document.createElement("select");
-  selectList.id = "priority";
+  let selectList = document.createElement('select');
+  selectList.id = 'priority';
   taskModal.appendChild(selectList);
 
   for (let i = 0; i < array.length; i++) {
-    let option = document.createElement("option");
+    let option = document.createElement('option');
     option.value = array[i];
     option.text = array[i];
     selectList.appendChild(option);
@@ -52,7 +62,7 @@ const newTaskModal = () => {
 
   const addTaskBtn = document.createElement('button');
   addTaskBtn.innerHTML = 'Add Task';
-  addTaskBtn.classList.add('btn');  
+  addTaskBtn.classList.add('btn'); 
   taskModal.appendChild(addTaskBtn);
 
   taskModalContainer.appendChild(taskModal);
@@ -62,11 +72,106 @@ const newTaskModal = () => {
   });
 
   addTaskBtn.addEventListener('click', () => {
-    activeProject.addTodo('Testing', 'bla bkah bkah bkah', '65789', 'medium');
-    tContainer.innerHTML = "";
+
+    activeProject.addTodo(
+      titleInput.value,
+      descInput.value,
+      datePicker.value,
+      selectList.value
+    );
+    tContainer.innerHTML = '';
     tasksView(activeProject.allTodos());
     content.removeChild(taskModalContainer);
   })
+  content.appendChild(taskModalContainer);
+}
+
+const updateTaskModal = () => {
+  const taskModalContainer = document.createElement('div');
+  taskModalContainer.classList.add('taskModalContainer');
+  const taskModal = document.createElement('div');
+  taskModal.classList.add('taskModal');
+
+  const closeBtn = document.createElement('span');
+  closeBtn.innerHTML = '&#10005;';
+  closeBtn.classList.add('closeBtn');
+  taskModal.appendChild(closeBtn);
+
+  const titleModal = document.createElement('h2');
+  titleModal.innerHTML = 'Update '+activeTask.title;
+  taskModal.appendChild(titleModal);
+
+  const titleInput = document.createElement('input');
+  titleInput.setAttribute('type', 'text');
+  titleInput.setAttribute('placeholder', 'Task Name');
+  titleInput.value = activeTask.title;
+  taskModal.appendChild(titleInput);
+
+  const descInput = document.createElement('textarea');
+  descInput.maxLength = '2000';
+  descInput.cols = '30';
+  descInput.rows = '10';
+  descInput.placeholder = 'Task Description';
+  descInput.value = activeTask.description;
+  taskModal.appendChild(descInput);
+
+  const datePicker = document.createElement('input');
+  datePicker.type = 'date';
+  datePicker.value = activeTask.dueDate;
+  taskModal.appendChild(datePicker);
+
+  let array = ['--Priority--', 'High', 'Medium', 'Low'];
+  let selectList = document.createElement('select');
+  selectList.id = 'priority';
+
+  for (let i = 0; i < array.length; i++) {
+    let option = document.createElement('option');
+    option.text = array[i];
+    selectList.appendChild(option);
+  }
+  selectList.value = activeTask.priority;
+  taskModal.appendChild(selectList);
+
+  const updateDeleteContainer = document.createElement('div');
+  updateDeleteContainer.classList.add('update-delete-container');
+  const updateTaskBtn = document.createElement('button');
+  updateTaskBtn.innerHTML = 'Update Task';
+  updateTaskBtn.classList.add('btn'); 
+  updateDeleteContainer.appendChild(updateTaskBtn);
+
+  const deleteTaskBtn = document.createElement('button');
+  deleteTaskBtn.classList.add('delete-task');
+  deleteTaskBtn.innerHTML = 'Delete';
+  deleteTaskBtn.classList.add('btn');
+  deleteTaskBtn.style.background = 'black'; 
+  updateDeleteContainer.appendChild(deleteTaskBtn);
+
+  taskModal.appendChild(updateDeleteContainer);
+  taskModalContainer.appendChild(taskModal);
+
+  closeBtn.addEventListener('click', () => {
+    content.removeChild(taskModalContainer);
+  });
+
+  updateTaskBtn.addEventListener('click', () => {
+    activeTask.editTask(
+      titleInput.value,
+      descInput.value,
+      datePicker.value,
+      selectList.value
+    );
+    tContainer.innerHTML = '';
+    tasksView(activeProject.allTodos());
+    content.removeChild(taskModalContainer);
+  });
+
+  deleteTaskBtn.addEventListener('click', () => {
+    let taskIndex = activeProject.allTodos().indexOf(activeTask);
+    activeProject.deleteTodo(taskIndex);
+    tContainer.innerHTML = '';
+    tasksView(activeProject.allTodos());
+    content.removeChild(taskModalContainer);
+  });
   content.appendChild(taskModalContainer);
 }
 
@@ -83,6 +188,7 @@ const tasksView = (tasks) => {
   newTaskBtn.innerHTML = 'Add Task'
 
   newTaskBtn.addEventListener('click', () => {
+    activeTask = 
     newTaskModal();
   });
   taskBtnContainer.appendChild(newTaskBtn);
@@ -101,15 +207,50 @@ const tasksView = (tasks) => {
     taskStatus.setAttribute('type', 'checkbox');
     taskStatus.checked = task.status;
 
+    if (task.status) {
+      tList.style.background = '#eee';
+    }
+    
+    taskStatus.addEventListener('click', () => {
+      task.toggleCheck();
+      tContainer.innerHTML = '';
+      tasksView(activeProject.allTodos());
+      console.log(task.status);
+    });
+
+
     const taskName = document.createElement('h4');
     taskName.innerHTML = task.title;
 
     const taskDate = document.createElement('p');
     taskDate.innerHTML = task.dueDate;
 
+    const priorityColor = document.createElement('span');
+    priorityColor.classList.add('priority-color');
+    if (task.priority === 'High') {
+      priorityColor.style.background = 'green';
+    } else if (task.priority === 'Medium') {
+      priorityColor.style.background = 'blue';
+    } else if (task.priority === 'Low') {
+      priorityColor.style.background = 'orange';
+    }
+
+    const editDiv = document.createElement('div');
+    editDiv.setAttribute('class', 'edit-div');
+    const editTask = document.createElement('i');
+    editTask.setAttribute('class', 'fas fa-pencil-alt');
+    editDiv.appendChild(editTask);
+
+    editDiv.addEventListener('click', () => {
+      activeTask = task;
+      updateTaskModal();
+    });
+
     tList.appendChild(taskStatus);
     tList.appendChild(taskName);
     tList.appendChild(taskDate);
+    tList.appendChild(priorityColor);
+    tList.appendChild(editDiv);
 
     taskListContainer.appendChild(tList);
   });
@@ -123,7 +264,8 @@ const newProjectModal = () => {
   nPModalContainer.classList.add('projectModalContainer');
   const nPModal = document.createElement('div');
   nPModal.classList.add('projectModal');
-  const closeBtn = document.createElement("span");
+  const closeBtn = document.createElement('span');
+  closeBtn.classList.add('closeBtn');
   closeBtn.innerHTML = '&#10005;';
   const titleModal = document.createElement('h2');
   titleModal.innerHTML = 'Add new project';
@@ -143,8 +285,8 @@ const newProjectModal = () => {
   })
   addProjectBtn.addEventListener('click', () => {
     controller.addProject(inputField.value);
-    pContainer.innerHTML = "";
-    tContainer.innerHTML = "";
+    pContainer.innerHTML = '';
+    tContainer.innerHTML = '';
     projectsView(controller.allProjects());
     content.removeChild(nPModalContainer);
   })
