@@ -61,6 +61,7 @@ This will open the app at port 9000. If it doesn't open, visit ```http://localho
 [Github](https://github.com/OlukaDenis) | [Twitter](https://twitter.com/dennylucaz) | [LinkedIn](https://linkedin.com/in/denis-oluka)
 
 👤 **Josue Brigido**
+
 [Github](https://github.com/kalavhan) | [Twitter](https://twitter.com/kalavhan) | [LinkedIn](https://linkedin.com/in/kalavhan)
 
 
