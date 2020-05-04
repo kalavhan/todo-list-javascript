@@ -7,21 +7,49 @@ const Projects = (name, projectId) => {
   const allTodos = () => {
     return todos;
   };
-  
+
   const getTodo = (position) => {
     return todos[position];
   };
 
   const addTodo = (title, description, dueDate, priority) => {
-    todos.push(Todo(title, description, dueDate, priority, false, projectId, todoId));
-    storage.saveTask([title, description, dueDate, priority, false, projectId, todoId]);
+    todos.push(
+      Todo(title, description, dueDate, priority, false, projectId, todoId)
+    );
+    storage.saveTask([
+      title,
+      description,
+      dueDate,
+      priority,
+      false,
+      projectId,
+      todoId,
+    ]);
     todoId = todoId + 1;
-  }
+  };
 
-  const addLocalTodo = (savedTitle, savedDescription, savedDueDate, savedPriority, savedStatus, savedProjectId, savedTodoId) => {
-    todos.push(Todo(savedTitle, savedDescription, savedDueDate, savedPriority, savedStatus, savedProjectId, savedTodoId));
+  const addLocalTodo = (
+    savedTitle,
+    savedDescription,
+    savedDueDate,
+    savedPriority,
+    savedStatus,
+    savedProjectId,
+    savedTodoId
+  ) => {
+    todos.push(
+      Todo(
+        savedTitle,
+        savedDescription,
+        savedDueDate,
+        savedPriority,
+        savedStatus,
+        savedProjectId,
+        savedTodoId
+      )
+    );
     todoId = savedTodoId + 1;
-  }
+  };
 
   const deleteTodo = (index) => {
     todos.splice(index, 1);
@@ -35,8 +63,8 @@ const Projects = (name, projectId) => {
     getTodo,
     addTodo,
     addLocalTodo,
-    deleteTodo
-  }
+    deleteTodo,
+  };
 };
 
 export default Projects;

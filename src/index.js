@@ -1,6 +1,5 @@
 import './index.css';
 import projectController from './modules/project_controller';
-import Helpers from './modules/helpers';
 /* eslint-disable */
 import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
@@ -41,7 +40,7 @@ const newTaskModal = () => {
   descInput.maxLength = '2000';
   descInput.cols = '30';
   descInput.rows = '10';
-  descInput.placeholder = 'Task Description'
+  descInput.placeholder = 'Task Description';
   taskModal.appendChild(descInput);
 
   const datePicker = document.createElement('input');
@@ -62,7 +61,7 @@ const newTaskModal = () => {
 
   const addTaskBtn = document.createElement('button');
   addTaskBtn.innerHTML = 'Add Task';
-  addTaskBtn.classList.add('btn'); 
+  addTaskBtn.classList.add('btn');
   taskModal.appendChild(addTaskBtn);
 
   taskModalContainer.appendChild(taskModal);
@@ -72,19 +71,31 @@ const newTaskModal = () => {
   });
 
   addTaskBtn.addEventListener('click', () => {
-
-    activeProject.addTodo(
-      titleInput.value,
-      descInput.value,
-      datePicker.value,
-      selectList.value
-    );
-    tContainer.innerHTML = '';
-    tasksView(activeProject.allTodos());
-    content.removeChild(taskModalContainer);
-  })
+    if (titleInput.value == null || titleInput.value == '') {
+      titleInput.style.background = '#ffe6e6';
+      titleInput.placeholder = 'Please provide the todo title!';
+    } else if (descInput.value == null || descInput.value == '') {
+      descInput.style.background = '#ffe6e6';
+      descInput.placeholder = 'Please provide the todo description!';
+    } else if (datePicker.value == null || datePicker.value == '') {
+      console.log(datePicker.value);
+      datePicker.style.background = '#ffe6e6';
+    } else if (selectList.value == '--Priority--') {
+      selectList.style.background = '#ffe6e6';
+    } else {
+      activeProject.addTodo(
+        titleInput.value,
+        descInput.value,
+        datePicker.value,
+        selectList.value
+      );
+      tContainer.innerHTML = '';
+      tasksView(activeProject.allTodos());
+      content.removeChild(taskModalContainer);
+    }
+  });
   content.appendChild(taskModalContainer);
-}
+};
 
 const updateTaskModal = () => {
   const taskModalContainer = document.createElement('div');
@@ -98,7 +109,7 @@ const updateTaskModal = () => {
   taskModal.appendChild(closeBtn);
 
   const titleModal = document.createElement('h2');
-  titleModal.innerHTML = 'Update '+activeTask.title;
+  titleModal.innerHTML = 'Update ' + activeTask.title;
   taskModal.appendChild(titleModal);
 
   const titleInput = document.createElement('input');
@@ -136,14 +147,14 @@ const updateTaskModal = () => {
   updateDeleteContainer.classList.add('update-delete-container');
   const updateTaskBtn = document.createElement('button');
   updateTaskBtn.innerHTML = 'Update Task';
-  updateTaskBtn.classList.add('btn'); 
+  updateTaskBtn.classList.add('btn');
   updateDeleteContainer.appendChild(updateTaskBtn);
 
   const deleteTaskBtn = document.createElement('button');
   deleteTaskBtn.classList.add('delete-task');
   deleteTaskBtn.innerHTML = 'Delete';
   deleteTaskBtn.classList.add('btn');
-  deleteTaskBtn.style.background = 'black'; 
+  deleteTaskBtn.style.background = 'black';
   updateDeleteContainer.appendChild(deleteTaskBtn);
 
   taskModal.appendChild(updateDeleteContainer);
@@ -173,7 +184,7 @@ const updateTaskModal = () => {
     content.removeChild(taskModalContainer);
   });
   content.appendChild(taskModalContainer);
-}
+};
 
 const tasksView = (tasks) => {
   const taskTopContainer = document.createElement('div');
@@ -185,11 +196,10 @@ const tasksView = (tasks) => {
   taskBtnContainer.setAttribute('class', 'newTaskBtn');
   const newTaskBtn = document.createElement('button');
   newTaskBtn.setAttribute('class', 'btn');
-  newTaskBtn.innerHTML = 'Add Task'
+  newTaskBtn.innerHTML = 'Add Task';
 
   newTaskBtn.addEventListener('click', () => {
-    activeTask = 
-    newTaskModal();
+    activeTask = newTaskModal();
   });
   taskBtnContainer.appendChild(newTaskBtn);
 
@@ -198,8 +208,8 @@ const tasksView = (tasks) => {
 
   const taskListContainer = document.createElement('div');
   taskListContainer.setAttribute('class', 'taskListContainer');
-  
-  tasks.forEach( task => {
+
+  tasks.forEach((task) => {
     const tList = document.createElement('div');
     tList.setAttribute('class', 'task-item');
 
@@ -208,15 +218,14 @@ const tasksView = (tasks) => {
     taskStatus.checked = task.status;
 
     if (task.status) {
-      tList.style.background = '#eee';
+      tList.style.background = '#ffe6e6';
     }
-    
+
     taskStatus.addEventListener('click', () => {
       task.toggleCheck();
       tContainer.innerHTML = '';
       tasksView(activeProject.allTodos());
     });
-
 
     const taskName = document.createElement('h4');
     taskName.innerHTML = task.title;
@@ -253,7 +262,7 @@ const tasksView = (tasks) => {
 
     taskListContainer.appendChild(tList);
   });
-  
+
   tContainer.appendChild(taskTopContainer);
   tContainer.appendChild(taskListContainer);
 };
@@ -281,16 +290,22 @@ const newProjectModal = () => {
   nPModalContainer.appendChild(nPModal);
   closeBtn.addEventListener('click', () => {
     content.removeChild(nPModalContainer);
-  })
+  });
   addProjectBtn.addEventListener('click', () => {
-    controller.addProject(inputField.value);
-    pContainer.innerHTML = '';
-    tContainer.innerHTML = '';
-    projectsView(controller.allProjects());
-    content.removeChild(nPModalContainer);
-  })
+    if (inputField.value == null || inputField.value == '') {
+      inputField.style.background = '#ffe6e6';
+      inputField.placeholder = 'Please enter the project name!';
+      return;
+    } else {
+      controller.addProject(inputField.value);
+      pContainer.innerHTML = '';
+      tContainer.innerHTML = '';
+      projectsView(controller.allProjects());
+      content.removeChild(nPModalContainer);
+    }
+  });
   content.appendChild(nPModalContainer);
-}
+};
 
 const projectsView = (projects) => {
   const projectContainerTop = document.createElement('div');
@@ -306,22 +321,22 @@ const projectsView = (projects) => {
 
   newProjectBtn.addEventListener('click', () => {
     newProjectModal();
-  })
+  });
   const pListContainer = document.createElement('div');
   const pList = document.createElement('ul');
   pListContainer.appendChild(pList);
   pListContainer.classList.add('pListContainer');
   pContainer.appendChild(pListContainer);
-  projects.forEach(project => {
+  projects.forEach((project) => {
     const projectName = document.createElement('li');
-    projectName.innerHTML = project.name
+    projectName.innerHTML = project.name;
     pList.appendChild(projectName);
     if (project.name === 'Default') {
       lastProjectSelected = projectName;
       activeProject = project;
       projectName.classList.add('active');
       tasksView(project.allTodos());
-    }    
+    }
 
     projectName.addEventListener('click', () => {
       lastProjectSelected.classList.remove('active');
@@ -331,9 +346,7 @@ const projectsView = (projects) => {
       tContainer.innerHTML = '';
       tasksView(project.allTodos());
     });
-
   });
-  
 };
 
 const render = () => {

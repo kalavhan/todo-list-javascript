@@ -1,20 +1,57 @@
 import storage from './storage';
-const Todo = (title, description, dueDate, priority, status = false, projectId, todoId) => {
+const Todo = (
+  title,
+  description,
+  dueDate,
+  priority,
+  status = false,
+  projectId,
+  todoId
+) => {
   function toggleCheck() {
     this.status = !this.status;
-    storage.updateTask([this.title, this.description, this.dueDate, this.priority, this.status, projectId, todoId], projectId, todoId)
+    storage.updateTask(
+      [
+        this.title,
+        this.description,
+        this.dueDate,
+        this.priority,
+        this.status,
+        projectId,
+        todoId,
+      ],
+      projectId,
+      todoId
+    );
   }
 
-  const checked = () => status = true;
+  const checked = () => (status = true);
 
-  const unchecked = () => status = false;
+  const unchecked = () => (status = false);
 
-  function editTask(editedTitle, editedDescription, editedDueDate, editedPriority) {
+  function editTask(
+    editedTitle,
+    editedDescription,
+    editedDueDate,
+    editedPriority
+  ) {
     this.title = editedTitle;
     this.description = editedDescription;
     this.dueDate = editedDueDate;
     this.priority = editedPriority;
-    storage.updateTask([this.title, this.description, this.dueDate, this.priority, this.status, projectId, todoId], projectId, todoId)
+    storage.updateTask(
+      [
+        this.title,
+        this.description,
+        this.dueDate,
+        this.priority,
+        this.status,
+        projectId,
+        todoId,
+      ],
+      projectId,
+      todoId
+    );
   }
 
   return {
@@ -28,9 +65,8 @@ const Todo = (title, description, dueDate, priority, status = false, projectId, 
     toggleCheck,
     checked,
     unchecked,
-    editTask
-  }
-
+    editTask,
+  };
 };
 
-export default Todo
+export default Todo;
