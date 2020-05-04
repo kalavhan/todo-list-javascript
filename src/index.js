@@ -13,7 +13,6 @@ const content = document.getElementById('content');
 const controller = projectController(0);
 const newTaskBtn = document.createElement('button');
 const newProjectBtn = document.createElement('button');
-const editDiv = document.createElement('div');
 controller.defaultData();
 let lastProjectSelected = '';
 let activeProject = '';
@@ -72,9 +71,14 @@ const tasksView = (tasks) => {
       priorityColor.style.background = 'orange';
     }
 
+    const editDiv = document.createElement('div');
     editDiv.setAttribute('class', 'edit-div');
     const editTask = document.createElement('i');
     editTask.setAttribute('class', 'fas fa-pencil-alt');
+    editDiv.addEventListener('click', () => {
+      activeTask = task;
+      updateTaskModal();
+    });
     editDiv.appendChild(editTask);
 
     tList.appendChild(taskStatus);
@@ -102,7 +106,7 @@ const updateTaskModal = () => {
   taskModal.appendChild(closeBtn);
 
   const titleModal = document.createElement('h2');
-  titleModal.innerHTML = 'Update ' + activeTask.title;
+  titleModal.innerHTML = `Update ${activeTask.title}`;
   taskModal.appendChild(titleModal);
 
   const titleInput = document.createElement('input');
@@ -178,11 +182,6 @@ const updateTaskModal = () => {
   });
   content.appendChild(taskModalContainer);
 };
-
-editDiv.addEventListener('click', () => {
-  activeTask = task;
-  updateTaskModal();
-});
 
 const newTaskModal = () => {
   const taskModalContainer = document.createElement('div');
