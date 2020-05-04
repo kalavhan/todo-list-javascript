@@ -1,6 +1,8 @@
-const Todo = (title, description, dueDate, priority, status = false) => {
+import storage from './storage';
+const Todo = (title, description, dueDate, priority, status = false, projectId, todoId) => {
   function toggleCheck() {
     this.status = !this.status;
+    storage.updateTask([this.title, this.description, this.dueDate, this.priority, this.status, projectId, todoId], projectId, todoId)
   }
 
   const checked = () => status = true;
@@ -12,6 +14,7 @@ const Todo = (title, description, dueDate, priority, status = false) => {
     this.description = editedDescription;
     this.dueDate = editedDueDate;
     this.priority = editedPriority;
+    storage.updateTask([this.title, this.description, this.dueDate, this.priority, this.status, projectId, todoId], projectId, todoId)
   }
 
   return {
@@ -20,6 +23,8 @@ const Todo = (title, description, dueDate, priority, status = false) => {
     dueDate,
     priority,
     status,
+    projectId,
+    todoId,
     toggleCheck,
     checked,
     unchecked,

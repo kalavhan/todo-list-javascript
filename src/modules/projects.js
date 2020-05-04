@@ -1,8 +1,9 @@
 import Todo from './todo';
+import storage from './storage';
 
-const Projects = (name) => {
+const Projects = (name, projectId) => {
   let todos = [];
-
+  let todoId = 0;
   const allTodos = () => {
     return todos;
   };
@@ -12,7 +13,14 @@ const Projects = (name) => {
   };
 
   const addTodo = (title, description, dueDate, priority) => {
-    todos.push(Todo(title, description, dueDate, priority));
+    todos.push(Todo(title, description, dueDate, priority, false, projectId, todoId));
+    storage.saveTask([title, description, dueDate, priority, false, projectId, todoId]);
+    todoId = todoId + 1;
+  }
+
+  const addLocalTodo = (savedTitle, savedDescription, savedDueDate, savedPriority, savedStatus, savedProjectId, savedTodoId) => {
+    todos.push(Todo(savedTitle, savedDescription, savedDueDate, savedPriority, savedStatus, savedProjectId, savedTodoId));
+    todoId = savedTodoId + 1;
   }
 
   const deleteTodo = (index) => {
@@ -21,9 +29,11 @@ const Projects = (name) => {
 
   return {
     name,
+    projectId,
     allTodos,
     getTodo,
     addTodo,
+    addLocalTodo,
     deleteTodo
   }
 };

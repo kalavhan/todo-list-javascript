@@ -11,7 +11,8 @@ import '@fortawesome/fontawesome-free/js/brands';
 let tContainer = document.getElementById('tasks');
 let pContainer = document.getElementById('projects');
 let content = document.getElementById('content');
-const controller = projectController();
+const controller = projectController(0);
+controller.defaultData();
 let lastProjectSelected = '';
 let activeProject = '';
 let activeTask = '';
@@ -100,6 +101,7 @@ const updateTaskModal = () => {
   const titleModal = document.createElement('h2');
   titleModal.innerHTML = 'Update '+activeTask.title;
   taskModal.appendChild(titleModal);
+  console.log(activeTask.projectId);
 
   const titleInput = document.createElement('input');
   titleInput.setAttribute('type', 'text');
