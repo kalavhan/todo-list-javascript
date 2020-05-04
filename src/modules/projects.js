@@ -25,6 +25,7 @@ const Projects = (name, projectId) => {
 
   const deleteTodo = (index) => {
     todos.splice(index, 1);
+    storage.deleteTask(projectId, index);
   };
 
   return {

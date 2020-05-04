@@ -16,7 +16,6 @@ controller.defaultData();
 let lastProjectSelected = '';
 let activeProject = '';
 let activeTask = '';
-const helper = Helpers();
 
 const newTaskModal = () => {
   const taskModalContainer = document.createElement('div');
@@ -101,7 +100,6 @@ const updateTaskModal = () => {
   const titleModal = document.createElement('h2');
   titleModal.innerHTML = 'Update '+activeTask.title;
   taskModal.appendChild(titleModal);
-  console.log(activeTask.projectId);
 
   const titleInput = document.createElement('input');
   titleInput.setAttribute('type', 'text');
@@ -217,7 +215,6 @@ const tasksView = (tasks) => {
       task.toggleCheck();
       tContainer.innerHTML = '';
       tasksView(activeProject.allTodos());
-      console.log(task.status);
     });
 
 

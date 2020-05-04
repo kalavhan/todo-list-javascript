@@ -8,7 +8,6 @@ const storage = (() => {
     } else {
       let tempArray = [];
       tempArray.push(project);
-      console.log(project)
       localStorage.setItem('projects', JSON.stringify(tempArray));
     }
   }
@@ -46,14 +45,22 @@ const storage = (() => {
 
   const updateTask = (newData, projectId, todoId) => {
     let savedTasks = JSON.parse(localStorage.getItem('tasks'));
-    console.log(newData);
-    console.log(projectId);
-    console.log(todoId);
-    console.log(savedTasks);
     for(let i = 0; i < savedTasks.length; i++){
       if(savedTasks[i][5] === projectId && savedTasks[i][6] === todoId){
         savedTasks[i] = newData;
         localStorage.setItem('tasks', JSON.stringify(savedTasks));
+        return;
+      }
+    }
+  }
+
+  const deleteTask = (projectId, todoId) => {
+    let savedTasks = JSON.parse(localStorage.getItem('tasks'));
+    for(let i = 0; i < savedTasks.length; i++){
+      if(savedTasks[i][5] === projectId && savedTasks[i][6] === todoId){
+        savedTasks.splice(i, 1);
+        localStorage.setItem('tasks', JSON.stringify(savedTasks));
+        return;
       }
     }
   }
@@ -63,7 +70,8 @@ const storage = (() => {
     saveTask,
     retrieveProjects,
     retrieveTasks,
-    updateTask
+    updateTask,
+    deleteTask
   }
 })();
 

@@ -10,12 +10,12 @@ const projectController = () => {
     const savedTasks = storage.retrieveTasks();
     if (savedProjects != false){
       savedProjects.forEach( savedProject => {
-        const newProject = Projects(savedProject[0], savedProject[1], true);
+        const newProject = Projects(savedProject[0], savedProject[1]);
         projects.push(newProject);
         if (savedTasks != false){
           const newProjectTasks = savedTasks.filter(pTask => pTask[5] == savedProject[1]);
           newProjectTasks.forEach( newTask => {
-            newProject.addLocalTodo(newTask[0], newTask[1], newTask[2], newTask[3], newTask[4], newTask[5], newTask[6], true);
+            newProject.addLocalTodo(newTask[0], newTask[1], newTask[2], newTask[3], newTask[4], newTask[5], newTask[6]);
           });
         }
       });
@@ -29,7 +29,6 @@ const projectController = () => {
 
   const addProject = (name) => {
     projects.push(Projects(name, count));
-    const saving = localStorage.getItem('addingProjects');
     storage.saveProject([name, count]);
     count = count + 1;
   }
