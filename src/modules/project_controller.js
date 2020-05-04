@@ -2,19 +2,19 @@ import Projects from './projects';
 import storage from './storage';
 
 const projectController = () => {
-  let projects = [];
+  const projects = [];
   let count = 1;
 
   const defaultData = () => {
     const savedProjects = storage.retrieveProjects();
     const savedTasks = storage.retrieveTasks();
-    if (savedProjects != false) {
+    if (savedProjects !== false) {
       savedProjects.forEach((savedProject) => {
         const newProject = Projects(savedProject[0], savedProject[1]);
         projects.push(newProject);
-        if (savedTasks != false) {
+        if (savedTasks !== false) {
           const newProjectTasks = savedTasks.filter(
-            (pTask) => pTask[5] == savedProject[1]
+            (pTask) => pTask[5] === savedProject[1]
           );
           newProjectTasks.forEach((newTask) => {
             newProject.addLocalTodo(
@@ -24,7 +24,7 @@ const projectController = () => {
               newTask[3],
               newTask[4],
               newTask[5],
-              newTask[6]
+              newTask[6],
             );
           });
         }
@@ -37,7 +37,7 @@ const projectController = () => {
         'Click me (example)',
         'This is just and example',
         '2020-06-24',
-        'Medium'
+        'Medium',
       );
     }
   };
@@ -45,12 +45,10 @@ const projectController = () => {
   const addProject = (name) => {
     projects.push(Projects(name, count));
     storage.saveProject([name, count]);
-    count = count + 1;
+    count += 1;
   };
 
-  const allProjects = () => {
-    return projects;
-  };
+  const allProjects = () => projects;
 
   return {
     defaultData,

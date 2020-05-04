@@ -1,4 +1,5 @@
 import storage from './storage';
+
 const Todo = (
   title,
   description,
@@ -6,7 +7,7 @@ const Todo = (
   priority,
   status = false,
   projectId,
-  todoId
+  todoId,
 ) => {
   function toggleCheck() {
     this.status = !this.status;
@@ -25,15 +26,11 @@ const Todo = (
     );
   }
 
-  const checked = () => (status = true);
-
-  const unchecked = () => (status = false);
-
   function editTask(
     editedTitle,
     editedDescription,
     editedDueDate,
-    editedPriority
+    editedPriority,
   ) {
     this.title = editedTitle;
     this.description = editedDescription;
@@ -63,8 +60,6 @@ const Todo = (
     projectId,
     todoId,
     toggleCheck,
-    checked,
-    unchecked,
     editTask,
   };
 };
