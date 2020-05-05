@@ -81,7 +81,7 @@ const tasksView = (tasks) => {
     editDiv.addEventListener('click', () => {
       activeTask = task;
       updateTaskModal();
-    })
+    });
 
     tList.appendChild(taskStatus);
     tList.appendChild(taskName);

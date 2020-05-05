@@ -42,11 +42,11 @@ const projectController = () => {
     }
   };
 
-  function addProject(name){
+  function addProject(name) {
     projects.push(Projects(name, count));
     storage.saveProject([name, count]);
     count += 1;
-  };
+  }
 
   const allProjects = () => projects;
 
