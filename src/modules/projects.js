@@ -10,7 +10,7 @@ const Projects = (name, projectId) => {
 
   const addTodo = (title, description, dueDate, priority) => {
     todos.push(
-      Todo(title, description, dueDate, priority, false, projectId, todoId,)
+      Todo(title, description, dueDate, priority, false, projectId, todoId),
     );
     storage.saveTask([
       title,

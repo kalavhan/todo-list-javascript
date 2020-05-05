@@ -75,11 +75,13 @@ const tasksView = (tasks) => {
     editDiv.setAttribute('class', 'edit-div');
     const editTask = document.createElement('i');
     editTask.setAttribute('class', 'fas fa-pencil-alt');
+    editDiv.id = task.todoId;
+    editDiv.appendChild(editTask);
+
     editDiv.addEventListener('click', () => {
       activeTask = task;
       updateTaskModal();
-    });
-    editDiv.appendChild(editTask);
+    })
 
     tList.appendChild(taskStatus);
     tList.appendChild(taskName);
