@@ -22,7 +22,7 @@ const Todo = (
         todoId,
       ],
       projectId,
-      todoId
+      todoId,
     );
   }
 
@@ -47,7 +47,7 @@ const Todo = (
         todoId,
       ],
       projectId,
-      todoId
+      todoId,
     );
   }
 

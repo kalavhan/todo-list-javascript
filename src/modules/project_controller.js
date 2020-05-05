@@ -14,7 +14,7 @@ const projectController = () => {
         projects.push(newProject);
         if (savedTasks !== false) {
           const newProjectTasks = savedTasks.filter(
-            (pTask) => pTask[5] === savedProject[1]
+            (pTask) => pTask[5] === savedProject[1],
           );
           newProjectTasks.forEach((newTask) => {
             newProject.addLocalTodo(
