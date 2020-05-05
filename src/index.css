@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans&display=swap");
+
+:root {
+  --primary-color: #d44638;
+  --secondary-color: #b23121;
+  --bg1-color: #eeeeee;
+  --bg2-color: #e2e2e2;
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Fira Sans", sans-serif;
+  font-weight: lighter;
+  letter-spacing: 0.8px;
+}
+
+/*--------------------------------------------------------
+          Scrollbar
+---------------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(216, 211, 211, 0.534);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(192, 63, 63);
+  border-radius: 20px;
+}
+
+#header {
+  height: 70px;
+}
+
+nav {
+  background-color: var(--secondary-color);
+  color: white;
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: calc(100vh - 70px);
+}
+
+#projects {
+  width: 25%;
+  background-color: var(--bg1-color);
+}
+
+#tasks {
+  width: 75%;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.projectModalContainer,
+.taskModalContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.projectModal {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  right: calc(50% - 150px);
+  top: calc(50% - 100px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.closeBtn {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+  align-self: flex-end;
+  padding-bottom: 0;
+  padding: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin: -20px -20px;
+  background-color: #000;
+}
+
+.closeBtn:hover {
+  cursor: pointer;
+}
+
+.projectModal > h2 {
+  margin-top: 20px;
+}
+
+.projectModal > button {
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  border-radius: 30px;
+  padding: 0.7em 2em;
+  color: #fff;
+  border: none;
+}
+
+.btn:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.pContainerTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  margin-bottom: 20px;
+}
+
+.pContainerTop > button {
+  width: 70%;
+  font-size: 16px;
+}
+
+.pListContainer {
+  overflow-y: scroll;
+  height: 80%;
+}
+
+.pListContainer > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.pListContainer > ul > li {
+  padding: 10px;
+  width: 90%;
+  text-align: center;
+  font-weight: 600;
+}
+
+.pListContainer > ul > li:hover {
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--bg2-color);
+  border-right: 2px solid #222;
+}
+
+input[type="text"],
+textarea,
+input[type="date"],
+select {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+/*-------------------------------------------------------------------------
+                                TASKS
+--------------------------------------------------------------------------*/
+.taskTopContainer {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 3px 0 6px 0 rgba(39, 39, 39, 0.2);
+}
+
+.taskTopContainer > h3 {
+  width: 50%;
+  text-align: right;
+}
+
+.newTaskBtn {
+  width: 50%;
+}
+
+.newTaskBtn > button {
+  float: right;
+  margin-top: 14px;
+  margin-right: 3rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.task-item > h4 {
+  margin-left: 8px;
+}
+
+.task-item > p {
+  margin-left: auto;
+  padding-right: 30px;
+}
+
+.task-item:hover {
+  background-color: var(--bg1-color);
+}
+
+.edit-div {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.taskModal {
+  position: absolute;
+  height: 500px;
+  width: 400px;
+  right: calc(50% - 200px);
+  top: calc(35% - 100px);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.taskModal > span {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+  align-self: flex-end;
+  padding-bottom: 0;
+  padding: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin: -20px -20px;
+  background-color: #000;
+}
+
+.taskListContainer {
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.priority-color {
+  display: block;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  margin-right: 30px;
+}
+
+.update-delete-container > .btn {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.delete-task:hover {
+  background-color: #999;
+}
+
+.update-delete-container {
+  margin-top: 8px;
+}
