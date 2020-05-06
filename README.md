@@ -1,7 +1,7 @@
 [![npm version](https://badge.fury.io/js/webpack.svg)](https://badge.fury.io/js/webpack)
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 [![GitHub version](https://badge.fury.io/gh/OlukaDenis%2Frestaurant-page.svg)](https://badge.fury.io/gh/OlukaDenis%2todo-list-javascript)
-![GitHub](https://img.shields.io/github/license/OlukaDenis/todo-list-javascript)
+![GitHub](https://img.shields.io/github/license/kalavhan/todo-list-javascript)
 
 # Project: To-do List
 
