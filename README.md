@@ -16,7 +16,7 @@ The goal of the project is to show the concepts of Single Responsibility and Tig
 - NodeJs
 
 ## Live Demo
-[Live link]('')
+[Live link]('https://todo-js-dj.netlify.app/')
 
 
 ## Prerequisites
